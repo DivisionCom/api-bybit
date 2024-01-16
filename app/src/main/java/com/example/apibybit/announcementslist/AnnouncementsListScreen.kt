@@ -10,11 +10,14 @@ import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Surface
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavController
+import com.example.apibybit.data.models.AnnouncementsListEntry
 
 @Composable
 fun AnnouncementsListScreen(
@@ -34,18 +37,22 @@ fun AnnouncementsList(
     navController: NavController,
     viewModel: AnnouncementsListViewModel = hiltViewModel(),
 ) {
-
+    val announcementsList by remember {
+        viewModel.announcementsList
+    }
+    val loadError by remember {
+        viewModel.loadError
+    }
 }
 
 @Composable
 fun AnnouncementsRow(
     rowIndex: Int,
-//    entries: List<AnnouncementsListEntry>,
+    entries: List<AnnouncementsListEntry>,
     navController: NavController,
 ) {
     Column {
         Row {
-
         }
         Spacer(modifier = Modifier.height(16.dp))
     }
@@ -53,7 +60,7 @@ fun AnnouncementsRow(
 
 @Composable
 fun AnnouncementsEntry(
-//    entry: AnnouncementsListEntry,
+    entry: AnnouncementsListEntry,
     navController: NavController,
     modifier: Modifier = Modifier,
     viewModel: AnnouncementsListViewModel = hiltViewModel(),
@@ -61,10 +68,9 @@ fun AnnouncementsEntry(
     Box(
         modifier =
             modifier
-                .clip(RoundedCornerShape(10.dp))
+                .clip(RoundedCornerShape(10.dp)),
     ) {
         Column {
-
         }
     }
 }
