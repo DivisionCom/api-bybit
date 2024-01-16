@@ -2,6 +2,8 @@ package com.example.apibybit.ui.theme
 
 import androidx.compose.ui.graphics.Color
 
+val LightBlue = Color(0xFFBAC7FF)
+
 val Purple80 = Color(0xFFD0BCFF)
 val PurpleGrey80 = Color(0xFFCCC2DC)
 val Pink80 = Color(0xFFEFB8C8)
