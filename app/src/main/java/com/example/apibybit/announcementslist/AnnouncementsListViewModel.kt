@@ -39,6 +39,8 @@ class AnnouncementsListViewModel
                                     entry.tags,
                                 )
                             }
+
+                        loadError.value = ""
                         announcementsList.value = announcementsEntries!!
                     }
                     is Resource.Error -> {

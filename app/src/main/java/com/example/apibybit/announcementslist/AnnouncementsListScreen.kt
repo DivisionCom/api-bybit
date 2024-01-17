@@ -15,12 +15,15 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.material3.Button
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.remember
+import androidx.compose.ui.Alignment
+import androidx.compose.ui.Alignment.Companion.CenterHorizontally
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.draw.shadow
@@ -43,7 +46,6 @@ fun AnnouncementsListScreen(
         color = MaterialTheme.colorScheme.background,
         modifier = Modifier.fillMaxSize(),
     ) {
-        Spacer(modifier = Modifier.height(20.dp))
         AnnouncementsList(navController = navController)
     }
 }
@@ -59,7 +61,6 @@ fun AnnouncementsList(
     val loadError by remember {
         viewModel.loadError
     }
-
     LazyColumn(contentPadding = PaddingValues(16.dp)) {
         val itemCount =
             if (announcementsList.size % 2 == 0) {
@@ -69,6 +70,19 @@ fun AnnouncementsList(
             }
         items(itemCount) {
             AnnouncementsRow(rowIndex = it, entries = announcementsList, navController = navController)
+        }
+    }
+
+    Box(
+        contentAlignment = Alignment.Center,
+        modifier =
+            Modifier
+                .fillMaxSize(),
+    ) {
+        if (loadError.isNotEmpty()) {
+            RetrySection(error = loadError) {
+                viewModel.loadAnnouncements()
+            }
         }
     }
 }
@@ -150,6 +164,29 @@ fun TagsRow(
                 }
                 Spacer(modifier = Modifier.width(8.dp))
             }
+        }
+    }
+}
+
+@Composable
+fun RetrySection(
+    error: String,
+    onRetry: () -> Unit,
+) {
+    Column {
+        Text(
+            text = error,
+            color = Color.Red,
+            fontSize = 18.sp,
+        )
+        Spacer(modifier = Modifier.height(8.dp))
+        Button(
+            onClick = { onRetry() },
+            modifier =
+                Modifier
+                    .align(CenterHorizontally),
+        ) {
+            Text(text = "Retry")
         }
     }
 }
