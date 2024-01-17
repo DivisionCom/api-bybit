@@ -12,6 +12,7 @@ import androidx.compose.foundation.layout.aspectRatio
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.MaterialTheme
@@ -25,6 +26,7 @@ import androidx.compose.ui.draw.clip
 import androidx.compose.ui.draw.shadow
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.LocalUriHandler
+import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.hilt.navigation.compose.hiltViewModel
@@ -111,12 +113,43 @@ fun AnnouncementsEntry(
             Text(
                 text = entry.title,
                 fontFamily = RobotoCondensed,
-                fontSize = 16.sp,
+                fontSize = 18.sp,
+                fontWeight = FontWeight.Bold,
             )
+            Spacer(modifier = Modifier.height(8.dp))
             Text(
                 text = entry.description,
                 fontSize = 14.sp,
             )
+            Spacer(modifier = Modifier.height(16.dp))
+            Text(
+                text = "Tags: ${entry.tags.size}",
+            )
+            TagsRow(entry = entry, navController = navController)
+        }
+    }
+}
+
+@Composable
+fun TagsRow(
+    entry: AnnouncementsListEntry,
+    navController: NavController,
+) {
+    Column {
+        Row {
+            for (i in 0..<entry.tags.size) {
+                Box(
+                    modifier =
+                        Modifier
+                            .shadow(2.dp, RoundedCornerShape(5.dp))
+                            .clip(RoundedCornerShape(5.dp))
+                            .border(1.dp, Color.Gray, RoundedCornerShape(5.dp))
+                            .padding(4.dp),
+                ) {
+                    Text(text = entry.tags[i])
+                }
+                Spacer(modifier = Modifier.width(8.dp))
+            }
         }
     }
 }

@@ -36,6 +36,7 @@ class AnnouncementsListViewModel
                                     entry.title,
                                     entry.description,
                                     entry.url,
+                                    entry.tags,
                                 )
                             }
                         announcementsList.value = announcementsEntries!!

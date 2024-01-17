@@ -4,4 +4,5 @@ data class AnnouncementsListEntry(
     val title: String,
     val description: String,
     val url: String,
+    val tags: List<String>,
 )
