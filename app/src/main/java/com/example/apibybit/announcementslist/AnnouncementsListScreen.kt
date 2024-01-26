@@ -8,7 +8,6 @@ import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
-import androidx.compose.foundation.layout.aspectRatio
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
@@ -118,7 +117,7 @@ fun AnnouncementsEntry(
                 .clip(RoundedCornerShape(10.dp))
                 .border(2.dp, Color.Yellow, RoundedCornerShape(10.dp))
                 .padding(8.dp)
-                .aspectRatio(1.5f)
+//                .aspectRatio(1.25f)
                 .clickable {
                     uriHandler.openUri(entry.url)
                 },
